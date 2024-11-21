@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/comments
+    username: admin
+    password: password
+  flyway:
+    enabled: true
+    locations:
+      - db.migration
+    baseline-on-migrate: true
