@@ -73,13 +73,6 @@ const App = () => {
                         Временами порешиваю литкод, но денег мне за алгоритмы никто не платит, а платят — за постоянное
                         таскание JSONчиков.
                     </p>
-                    <iframe src="https://vk.com/video_ext.php?oid=-179486669&id=456239279&hd=2&autoplay=1&muted=0"
-                            width="100%"
-                            height="240"
-                            allow="autoplay; unmute; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
-                            allowFullScreen>
-                    </iframe>
-
 
                     <div className="links">
                         <div>
