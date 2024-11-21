@@ -1,0 +1,159 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background-image: url('https://i.pinimg.com/originals/64/19/e4/6419e47b4a7630da834f80287a390c41.jpg');
+  background-size: auto;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ff0066;
+  padding: 20px;
+  text-align: center;
+  font-size: 2em;
+  text-transform: uppercase;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: stretch; /* Выравнивание высоты */
+}
+
+.main-content,
+.comments-section {
+  flex: 1; /* Устанавливает меньшую ширину, чем у main-content */
+  overflow-y: auto; /* Вертикальная прокрутка */
+  max-height: calc(100vh - 200px); /* Ограничиваем высоту секции (подстраиваем под экран) */
+  background-color: rgba(30, 30, 30, 0.6); /* Фон секции */
+  padding: 20px;
+  margin-top: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.main-content {
+  flex: 2; /* Задает ширину относительно comments-section */
+  margin-right: 20px;
+}
+
+.comments-section {
+  flex: 1; /* Устанавливает меньшую ширину, чем у main-content */
+  overflow-y: auto; /* Прокрутка внутри комментариев */
+}
+
+.comments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 100%; /* Ограничивает высоту относительно родителя */
+}
+
+.image-user {
+  display: flex;
+  float: left;
+  width: auto;
+  height: auto;
+  max-width: 20%;
+  max-height: 20%;
+  border-radius: 50%;
+}
+
+.user {
+  display: inline-block;
+}
+
+.comment {
+  background-color: rgba(50, 50, 50, 0.9);
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: #e0e0e0;
+  font-family: 'Courier New', Courier, monospace;
+  word-wrap: break-word; /* Перенос слов на новую строку */
+  word-break: break-word; /* Перенос при отсутствии пробелов */
+  white-space: pre-wrap; /* Сохраняет форматирование и переносы */
+}
+
+.text {
+  display: flex;
+  padding-left: 10px;
+  color: #e0e0e0;
+  font-family: 'Courier New', Courier, monospace;
+  word-wrap: break-word; /* Перенос слов на новую строку */
+  word-break: break-word; /* Перенос при отсутствии пробелов */
+  white-space: pre-wrap; /* Сохраняет форматирование и переносы */
+}
+
+.comment-input {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.add-comment-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff0066;
+  margin-bottom: 10px;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  text-transform: uppercase;
+
+}
+
+.add-comment-button:hover {
+  background-color: #ff3366;
+}
+
+.about-section {
+  background-color: rgba(30, 30, 30, 0.6); /* Фон плашки "Обо мне" */
+  padding: 15px; /* Внутренние отступы */
+  border-radius: 5px; /* Закругленные углы */
+  margin-top: 15px; /* Расстояние сверху */
+  margin-bottom: 15px; /* Расстояние снизу */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffcc00;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  font-size: 0.8em;
+}
+
+.profile-image {
+  float: right;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.highlight {
+  color: #ffcc00;
+  font-style: italic;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+}
+
+.link-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+  padding-right: 15px;
+}
