@@ -27,6 +27,10 @@ services:
   react:
     container_name: react
     build: ./webTask
+    environment:
+      - HTTPS=true
+      - SSL_CRT_FILE=/app/certs/fullchain.pem
+      - SSL_KEY_FILE=/app/certs/privkey.pem
     ports:
       - "3000:3000"
 
