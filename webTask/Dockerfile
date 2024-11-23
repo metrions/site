@@ -18,7 +18,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Устанавливаем переменные окружения для HTTPS
-ENV HTTPS=true
+#ENV HTTPS=true
 ENV SSL_CRT_FILE=/app/certs/fullchain.pem
 ENV SSL_KEY_FILE=/app/certs/privkey.pem
 
