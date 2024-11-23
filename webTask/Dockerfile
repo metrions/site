@@ -1,34 +1,39 @@
 # Этап сборки
 FROM node:18-alpine AS build
 
+# Устанавливаем рабочую директорию
 WORKDIR /app
 
 # Копируем только необходимые файлы для установки зависимостей
 COPY package.json package-lock.json ./
 
-# Устанавливаем зависимости (без dev-зависимостей)
-RUN npm install --production
+# Устанавливаем зависимости, включая dev-зависимости
+RUN npm install
 
 # Копируем весь исходный код
 COPY . .
 
+# Собираем приложение
+RUN npm run build
+
 # Этап продакшн-образа
 FROM node:18-alpine AS production
 
+# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Устанавливаем переменные окружения для сертификатов
-ENV HTTPS=true
-ENV SSL_CRT_FILE=./certs/fullchain.pem
-ENV SSL_KEY_FILE=./certs/privkey.pem
+# Копируем собранные файлы из предыдущего этапа
+COPY --from=build /app/build ./build
 
-# Копируем из предыдущего этапа только установленные зависимости и собранный код
-COPY --from=build /app /app
-COPY ./certs/fullchain.pem ./certs/fullchain.pem
-COPY ./certs/privkey.pem ./certs/privkey.pem
+# Устанавливаем сертификаты (убедитесь, что файлы доступны)
+COPY ./certs/cert.pem /app/certs/fullchain.pem
+COPY ./certs/decrypted_privkey.pem /app/certs/privkey.pem
+
+# Устанавливаем HTTP-сервер (например, serve) для раздачи production файлов
+RUN npm install -g serve
 
 # Открываем порт для приложения
-EXPOSE 3000
+EXPOSE 443
 
-# Запуск приложения
-CMD ["npm", "start"]
+# Запуск приложения через HTTPS
+CMD ["serve", "-s", "build", "-l", "443", "--ssl-cert", "./certs/fullchain.pem", "--ssl-key", "./certs/privkey.pem"]
