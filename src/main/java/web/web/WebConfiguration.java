@@ -9,7 +9,8 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://ff73-103-80-86-254.ngrok-free.app")
-                .allowedMethods("*");
+                .allowedOrigins("https://panarin.site:3000") // Разрешить ваш фронтенд
+                .allowedMethods("*")
+                .allowCredentials(true); // Если используется авторизация через cookie
     }
 }
