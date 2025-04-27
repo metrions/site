@@ -3,13 +3,10 @@ FROM node:18-alpine AS build
 
 WORKDIR /app
 
-# Копируем только необходимые файлы для установки зависимостей
 COPY package.json package-lock.json ./
 
-# Устанавливаем все зависимости
 RUN npm install
 
-# Копируем исходный код
 COPY . .
 
 # Этап production

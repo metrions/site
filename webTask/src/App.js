@@ -4,7 +4,7 @@ import TelegramLogin from "./components/TelegramLogin";
 import axios from "axios";
 
 const App = () => {
-    const backend = "https://panarin.site:8080";
+    const backend = process.env.REACT_APP_BACK_URI;
     const [comments, setComments] = useState([]);
     useEffect(() => {
         axios.get(backend+"/user/getAllCommentsByUser").then((response) => {

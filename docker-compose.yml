@@ -23,7 +23,7 @@ services:
     networks:
       - keycloak_demo
     ports:
-      - "8080:8080"
+      - "8083:8083"
   react:
     container_name: react
     build: ./webTask
@@ -31,6 +31,7 @@ services:
       - HTTPS=true
       - SSL_CRT_FILE=/app/certs/fullchain.pem
       - SSL_KEY_FILE=/app/certs/privkey.pem
+      - BACK_URL=https://45.139.77.150:8083
     ports:
       - "3000:3000"
 
