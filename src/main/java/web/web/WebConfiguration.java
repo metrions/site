@@ -1,18 +1,23 @@
 package web.web;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
+    @Value("${frontend}")
+    String frontend;
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(
+                        frontend,
                         "http://localhost:3000",
                         "https://panarin.site:3000",
-                        "https://9b6d-2a0d-6c2-17-8038-00.ngrok-free.app"
+                        "https://9b6d-2a0d-6c2-17-8038-00.ngrok-free.app",
+                        "https://*"
                 )
                 .allowedMethods("*")
                 .allowCredentials(true); // Если используется авторизация через cookie

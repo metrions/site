@@ -1,4 +1,3 @@
-
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/comments
@@ -12,11 +11,5 @@ spring:
 
 server:
   port: 8080
-  ssl:
-    key-store-type: PKCS12
-    # The path to the keystore containing the certificate
-    key-store: ./keystore.p12
-    # The password used to generate the certificate
-    key-store-password: password
-    # The alias mapped to the certificate
-    key-alias: tomcat
+
+frontend: ${FRONTEND_URL}
