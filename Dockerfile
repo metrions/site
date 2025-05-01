@@ -4,7 +4,7 @@ VOLUME /tmp
 
 COPY /build/libs/*.jar /opt/service.jar
 COPY config/application.yml /opt/application.yml
-COPY config/keystore.p12 /opt/keystore.p12
+COPY keystore.p12 /opt/keystore.p12
 
 EXPOSE 8080
 
