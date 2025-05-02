@@ -19,7 +19,7 @@ services:
       dockerfile: ./Dockerfile
       context: .
     environment:
-      - FRONTEND_URL=http://localhost:3000
+      - FRONTEND_URL=http://45.139.77.150:3000
     container_name: backend-web
     networks:
       - keycloak_demo
@@ -29,10 +29,7 @@ services:
     container_name: react
     build: ./webTask
     environment:
-      - HTTPS=true
-      - SSL_CRT_FILE=/app/certs/fullchain.pem
-      - SSL_KEY_FILE=/app/certs/privkey.pem
-      - BACK_URL=https://45.139.77.150:8083
+      - BACK_URL=http://45.139.77.150:8080
     ports:
       - "3000:3000"
 

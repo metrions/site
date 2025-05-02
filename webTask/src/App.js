@@ -1,22 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
-import TelegramLogin from "./components/TelegramLogin";
 import axios from "axios";
 
 const App = () => {
-    const backend = process.env.REACT_APP_BACK_URI;
+    const backend = "http://45.139.77.150:8080";
     const [comments, setComments] = useState([]);
     useEffect(() => {
-        axios.get(backend+"/user/getAllCommentsByUser").then((response) => {
+        axios.get(backend + "/user/getAllCommentsByUser").then((response) => {
             setComments(response.data);
         });
     }, [])
-    const [newComment, setNewComment] = useState({ message: '', urlPhoto: localStorage.getItem('url_photo') || '', name: localStorage.getItem('username') || '' });
+
+    const [newComment, setNewComment] = useState({
+        message: '',
+        urlPhoto: localStorage.getItem('url_photo') || '',
+        name: localStorage.getItem('username') || ''
+    });
+
     const commentsEndRef = useRef(null);
 
-    const setName = (name, urlPhoto) => {
-        setNewComment((prev) => ({ ...prev, name, urlPhoto}));
-        localStorage.setItem('username', name); // Сохраняем имя в localStorage
+    const setName = (name) => {
+        setNewComment((prev) => ({ ...prev, name }));
+        localStorage.setItem('username', name);
     };
 
     const setMessage = (message) => {
@@ -26,9 +31,8 @@ const App = () => {
     const handleAddComment = () => {
         if (newComment.message.trim() && newComment.name.trim()) {
             setComments((prevComments) => [...prevComments, newComment]);
-            setNewComment({ message: '', name: newComment.name, urlPhoto: newComment.urlPhoto}); // Сохраняем имя для следующего комментария
-            axios.post(backend+"/user/saveComment", newComment).then((response) => {
-            })
+            setNewComment({ message: '', name: newComment.name, urlPhoto: newComment.urlPhoto });
+            axios.post(backend + "/user/saveComment", newComment).then((response) => {})
         }
     };
 
@@ -53,25 +57,20 @@ const App = () => {
                     <div>
                         <p>
                             Меня зовут <span className="highlight">Панарин Илья</span>. Живу в{' '}
-                            <span className="highlight">Новосибирске</span> — городе, где лед и мрак
-                            сливаются в единое целое.
+                            <span className="highlight">Новосибирске</span>.
                         </p>
-                        <p>
-                            Не особо люблю фронтенд, но люблю бекенд, так как для меня он легче.
-                        </p>
+                        <p>Не особо люблю фронтенд, но люблю бекенд.</p>
                     </div>
 
                     <h2>Образование</h2>
                     <p>
                         Учусь в <span className="highlight">НГТУ</span> на направлении{' '}
-                        <span className="highlight">прикладная математика и информатика</span>. Мир чисел
-                        и алгоритмов — это бесконечный поток, который затягивает и не отпускает.
+                        <span className="highlight">прикладная математика и информатика</span>.
                     </p>
 
                     <h2>Интересы</h2>
                     <p>
-                        Временами порешиваю литкод, но денег мне за алгоритмы никто не платит, а платят — за постоянное
-                        таскание JSONчиков.
+                        Временами порешиваю литкод, но платят — за таскание JSONчиков.
                     </p>
 
                     <div className="links">
@@ -99,8 +98,15 @@ const App = () => {
                 </div>
 
                 <div className="comments-section">
-                <h2>Комментарии</h2>
-                    <TelegramLogin setUserName={setName}/>
+                    <h2>Комментарии</h2>
+
+                    <input
+                        className="comment-input"
+                        placeholder="Введите ваше имя"
+                        value={newComment.name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+
                     <textarea
                         className="comment-input"
                         placeholder="Оставьте комментарий..."
@@ -114,11 +120,10 @@ const App = () => {
                         {comments.map((comment, index) => (
                             <li key={index} className="comment">
                                 <div className="user">
-                                    <img
-                                        className="image-user"
-                                        src={comment.urlPhoto}
-                                    />
-                                    <div className="text">{comment.name}:{comment.message}</div>
+                                    {comment.urlPhoto && (
+                                        <img className="image-user" src={comment.urlPhoto} alt="avatar" />
+                                    )}
+                                    <div className="text">{comment.name}: {comment.message}</div>
                                 </div>
                             </li>
                         ))}

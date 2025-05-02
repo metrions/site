@@ -13,11 +13,5 @@ spring:
 
 server:
   port: 8080
-  ssl:
-    enabled: true
-    key-store: /opt/keystore.p12
-    key-store-password: changeit
-    key-store-type: PKCS12
-    key-alias: spring-boot-ssl
 
 frontend: ${FRONTEND_URL}

@@ -17,7 +17,7 @@ public class WebConfiguration implements WebMvcConfigurer {
                         "http://localhost:3000",
                         "https://panarin.site:3000",
                         "https://b9c2-2a03-6f02-00-8920.ngrok-free.app",
-                        "https://94.241.174.238"
+                        "https://94.241.174.238:3000"
                 )
                 .allowedMethods("*")
                 .allowCredentials(true); // Если используется авторизация через cookie
